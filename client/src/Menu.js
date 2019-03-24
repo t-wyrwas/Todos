@@ -7,15 +7,32 @@ class Menu extends Component {
     constructor() {
         super();
         this.state = {
-            projects: {
-                name: 'None',
-                select: this.props.selectProject
-            }
+            projects: []
         }
+        this.selectProject = this.selectProject.bind(this);
     }
     
     componentWillMount() {
-        this.setState({projects: ['proj1', 'proj2']})
+        this.setState({
+            projects: [
+                {
+                    id: 0,
+                    name: 'Home',
+                    select: this.selectProject
+                },
+                {
+                    id: 1,
+                    name: 'Work',
+                    select: this.selectProject
+                },
+                {
+                    id: 2,
+                    name: 'Education',
+                    select: this.selectProject
+                }
+
+            ]
+        });
     }
 
     render() {
@@ -26,6 +43,10 @@ class Menu extends Component {
                 })} 
             </div>
         );
+    }
+
+    selectProject(name) {
+        this.props.selectProject(name);
     }
 }
 

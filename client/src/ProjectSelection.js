@@ -5,6 +5,7 @@ class ProjectSelection extends Component {
 
     constructor() {
         super();
+        this.selectSelf = this.selectSelf.bind(this);
     }
     
     componentWillMount() {
@@ -13,7 +14,7 @@ class ProjectSelection extends Component {
     render() {
         return (
             <div className="project-selection">
-                <div onKeyPress={this.selectSelf}>{this.props.name}</div>
+                <div className="project-name" onClick={this.selectSelf}>{this.props.name}</div>
             </div>
         );
     }

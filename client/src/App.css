@@ -14,3 +14,7 @@
 .project-selection {
   margin: 30px;
 }
+
+.project-selection .project-name:hover {
+  cursor: pointer;
+}

@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Menu from './Menu.js'
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.setState({selectedProject: null})
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Menu selectProject={this.selectProject}></Menu>
       </div>
     );
+  }
+
+  selectProject(name) {
+        let newState = this.state;
+        newState.selectedProject = name;
+        this.setState(newState);
   }
 }
 

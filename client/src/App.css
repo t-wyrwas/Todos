@@ -4,7 +4,7 @@
 
 .menu {
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: flex-start;
   flex-direction: row;
   margin: 30px;
@@ -17,4 +17,21 @@
 
 .project-selection .project-name:hover {
   cursor: pointer;
+}
+
+.board-task-area {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.status-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.task {
+  margin: 20px;
 }

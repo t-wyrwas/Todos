@@ -12,27 +12,17 @@ class Menu extends Component {
         this.selectProject = this.selectProject.bind(this);
     }
     
-    componentWillMount() {
+    async componentWillMount() {
+        let response = await fetch('/api/projects');
+        let projectList = await response.json()
+        
         this.setState({
-            projects: [
-                {
-                    id: 0,
-                    name: 'Home',
-                    select: this.selectProject
-                },
-                {
-                    id: 1,
-                    name: 'Work',
-                    select: this.selectProject
-                },
-                {
-                    id: 2,
-                    name: 'Education',
-                    select: this.selectProject
-                }
-
-            ]
+            projects: projectList.map((p) => {
+                p.select = this.selectProject;
+                return p;
+            })
         });
+       
     }
 
     render() {

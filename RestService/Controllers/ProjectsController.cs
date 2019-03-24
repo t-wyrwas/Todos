@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestService.Model;
+using RestService.Services;
 
 namespace RestService.Controllers
 {
@@ -11,33 +12,23 @@ namespace RestService.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-		//todo mock
-		private readonly List<Project> _projects = new List<Project> { new Project {
-                Id = 0,
-                Name = "Work",
-            },
-            new Project {
-                Id = 1,
-                Name = "University",
-            },
-            new Project {
-                Id = 2,
-                Name = "Day to day",
-            },
-            };
+		public ProjectsController(IProjectService projectService)
+		{
+			_projectService = projectService;
+		}
 
         // GET api/projects
         [HttpGet]
         public ActionResult<IEnumerable<Project>> Get()
         {
-			return _projects;
+			return _projectService.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<Project> Get(int id)
         {
-            return _projects.FirstOrDefault(p => p.Id == id);
+			return _projectService.Get(id);
         }
 
         // POST api/values
@@ -57,5 +48,7 @@ namespace RestService.Controllers
         public void Delete(int id)
         {
         }
+
+		private readonly IProjectService _projectService;
     }
 }

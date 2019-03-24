@@ -13,7 +13,7 @@ class Board extends Component {
     render() {
         return (
             <div className="board">
-                <span>Project: {this.props.projectName}</span>
+                <span>Project: {this.props.projectId}</span>
             </div>
         );
     }

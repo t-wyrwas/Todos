@@ -20,7 +20,7 @@ class ProjectSelection extends Component {
     }
 
     selectSelf() {
-        this.props.selectProject(this.props.name);
+        this.props.selectProject(this.props.id);
     }
 }
 

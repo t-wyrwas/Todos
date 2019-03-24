@@ -39,14 +39,14 @@ class Menu extends Component {
         return (
             <div className="menu">
                 {this.state.projects.map(function (project) {
-                    return <ProjectSelection name={project.name} selectProject={project.select}></ProjectSelection>
+                    return <ProjectSelection id = {project.id} name={project.name} selectProject={project.select}></ProjectSelection>
                 })} 
             </div>
         );
     }
 
-    selectProject(name) {
-        this.props.selectProject(name);
+    selectProject(id) {
+        this.props.selectProject(id);
     }
 }
 

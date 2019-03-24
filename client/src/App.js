@@ -15,14 +15,14 @@ class App extends Component {
     return (
       <div className="App">
         <Menu selectProject={this.selectProject}></Menu>
-        <Board projectName={this.state.selectedProject}></Board>
+        <Board projectId={this.state.selectedProject}></Board>
       </div>
     );
   }
 
-  selectProject(name) {
+  selectProject(id) {
         let newState = this.state;
-        newState.selectedProject = name;
+        newState.selectedProject = id;
         this.setState(newState);
   }
 }

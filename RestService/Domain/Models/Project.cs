@@ -1,4 +1,4 @@
-namespace RestService.Model
+namespace Domain.Models
 {
     public class Project
     {

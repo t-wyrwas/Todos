@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RestService.Model;
+using Domain.Models;
 
 namespace RestService.Services 
 {

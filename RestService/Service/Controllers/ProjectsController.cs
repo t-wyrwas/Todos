@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Domain.Models;
+using Task = Domain.Models.Task;
 using RestService.Services;
 
 namespace RestService.Controllers
@@ -12,9 +13,10 @@ namespace RestService.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-		public ProjectsController(IProjectService projectService)
+		public ProjectsController(IProjectService projectService, ITaskService taskService)
 		{
 			_projectService = projectService;
+            _taskService = taskService;
 		}
 
         // GET api/projects
@@ -24,31 +26,23 @@ namespace RestService.Controllers
 			return _projectService.GetAll();
         }
 
-        // GET api/values/5
+        // GET api/projects/5
+        [Route("[[id]]")]
         [HttpGet("{id}")]
         public ActionResult<Project> Get(int id)
         {
 			return _projectService.Get(id);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // GET api/projects/5/tasks
+        [Route("[[id]]/tasks")]
+        [HttpGet("{id}/tasks")]
+        public ActionResult<IEnumerable<Task>> GetTasks(int id)
         {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+			return _taskService.GetAllInProject(id);
         }
 
 		private readonly IProjectService _projectService;
+		private readonly ITaskService _taskService;
     }
 }

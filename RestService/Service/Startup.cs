@@ -30,6 +30,7 @@ namespace RestService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
         }

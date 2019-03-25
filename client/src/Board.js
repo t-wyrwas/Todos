@@ -6,6 +6,7 @@ class Board extends Component {
     constructor() {
         super();
         this.state = {
+            selectedProjectName: null,
             todo: [
                 {
                     name: "do shoping",
@@ -35,13 +36,18 @@ class Board extends Component {
         }
     }
 
-    componentWillMount() {
+    async componentWillReceiveProps(nextProps) {
+        let newState = this.state;
+        let response = await fetch('/api/projects/' + nextProps.projectId);
+        let selectedProject = await response.json();
+        newState.selectedProjectName = selectedProject.name;
+        this.setState(newState);
     }
 
     render() {
         return (
             <div className="board">
-                <h2>Project: {this.props.projectId}</h2>
+                <h2>Project: {this.state.selectedProjectName}</h2>
                 <div className="board-task-area">
                     <div className="status-column">
                         <div>

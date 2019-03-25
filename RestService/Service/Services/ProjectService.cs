@@ -2,35 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Models;
+using Domain.Repositories;
 
 namespace RestService.Services 
 {
     public class ProjectService : IProjectService
     {
-		//todo mock
-		private readonly List<Project> _projects = new List<Project> { 
-            new Project {
-                Id = 0,
-                Name = "Work",
-            },
-            new Project {
-                Id = 1,
-                Name = "University",
-            },
-            new Project {
-                Id = 2,
-                Name = "Day to day",
-            },
-        };
+        public ProjectService(IProjectRepository projectRepository)
+        {
+            _projectRepository = projectRepository;
+        }
 
         public List<Project> GetAll()
         {
-            return _projects;
+            return _projectRepository.Get(p => true);
         }
 
         public Project Get(int id) 
         {
-            return _projects.FirstOrDefault(p => p.Id == id);
+            return _projectRepository.GetById(id);
         }
+
+        private readonly IProjectRepository _projectRepository;
     }
 }

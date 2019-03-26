@@ -7,40 +7,22 @@ class Board extends Component {
         super();
         this.state = {
             selectedProjectName: null,
-            todo: [
-                {
-                    name: "do shoping",
-                    details: "buy some bread"
-                },
-                {
-                    name: "go to school",
-                    details: "learn something finally"
-                }
-            ],
-            doing: [
-                {
-                    name: "read a book",
-                    details: "be smarter"
-                },
-            ],
-            done: [
-                {
-                    name: "by a car",
-                    details: "hyundai i30"
-                },
-                {
-                    name: "do something with your life",
-                    details: "e.g. stop living in a cellar"
-                },
-            ],
+            todo: [],
+            doing: [],
+            done: [],
         }
     }
 
     async componentWillReceiveProps(nextProps) {
+        let projectResponse = await fetch('/api/projects/' + nextProps.projectId);
+        let selectedProject = await projectResponse.json();
+        let tasksResponse = await fetch('/api/projects/' + nextProps.projectId + '/tasks');
+        let tasks = await tasksResponse.json();
         let newState = this.state;
-        let response = await fetch('/api/projects/' + nextProps.projectId);
-        let selectedProject = await response.json();
         newState.selectedProjectName = selectedProject.name;
+        newState.todo = tasks.filter(t => t.taskStatus === 1);
+        newState.doing = tasks.filter(t => t.taskStatus === 2);
+        newState.done = tasks.filter(t => t.taskStatus === 3);
         this.setState(newState);
     }
 
